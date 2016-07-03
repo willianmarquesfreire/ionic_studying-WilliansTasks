@@ -23,6 +23,61 @@ app.run(function($ionicPlatform) {
   });
 });
 
-app.controller('mainController', function($scope) {
+app.controller('mainController', function($scope, $ionicPopup, $ionicListDelegate) {
   $scope.app = "Teste do Ionic";
-});
+
+  var tasks = new getTasks();
+  $scope.lista = tasks.items;
+
+  $scope.showMarked = false;
+  $scope.removeStatus = false;
+
+  function getItem(item, novo) {
+    $scope.data = {};
+    $scope.data.newTask = item.nome;
+
+    $ionicPopup.show({
+      title: "Nova Tarefa",
+      scope: $scope,
+      template: "<input type='text' placeholder='Tarefa' autofocus='true' ng-model='data.newTask'>",
+      buttons: [
+        {text: "Ok", 
+          onTap:function(e) {
+            item.nome = $scope.data.newTask;
+            if(novo)
+              tasks.add(item);
+          }
+        },
+        {text: "Cancelar"}
+      ]
+    });
+    $ionicListDelegate.closeOptionButtons();
+  };
+
+  $scope.onMarkTask = function(item) {
+    console.log(item);
+    item.finalizada = !item.finalizada;
+  };
+
+  $scope.onShowItem = function(item) {
+    return item.finalizada && !$scope.showMarked;
+  };
+
+  $scope.onItemRemove = function(item) {
+    tasks.remove(item);
+  };
+
+  $scope.onClickRemove = function() {
+    $scope.removeStatus = !$scope.removeStatus;
+  };
+
+  $scope.onItemAdd = function() {
+    var item = {nome: "", finalizada: false};
+    getItem(item, true);
+  };
+
+  $scope.onItemEdit = function(item) {
+    getItem(item, false);
+  };
+
+}); 
