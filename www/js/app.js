@@ -22,3 +22,7 @@ app.run(function($ionicPlatform) {
     }
   });
 });
+
+app.controller('mainController', function($scope) {
+  $scope.app = "Teste do Ionic";
+});
