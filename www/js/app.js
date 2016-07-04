@@ -24,7 +24,7 @@ app.run(function($ionicPlatform) {
 });
 
 app.controller('mainController', function($scope, $ionicPopup, $ionicListDelegate) {
-  $scope.app = "Teste do Ionic";
+  $scope.app = "Willian's Tasks";
 
   var tasks = new getTasks();
   $scope.lista = tasks.items;
@@ -46,6 +46,8 @@ app.controller('mainController', function($scope, $ionicPopup, $ionicListDelegat
             item.nome = $scope.data.newTask;
             if(novo)
               tasks.add(item);
+            tasks.save();
+            console.log(item);
           }
         },
         {text: "Cancelar"}
@@ -55,8 +57,8 @@ app.controller('mainController', function($scope, $ionicPopup, $ionicListDelegat
   };
 
   $scope.onMarkTask = function(item) {
-    console.log(item);
     item.finalizada = !item.finalizada;
+    tasks.save();
   };
 
   $scope.onShowItem = function(item) {
@@ -65,6 +67,7 @@ app.controller('mainController', function($scope, $ionicPopup, $ionicListDelegat
 
   $scope.onItemRemove = function(item) {
     tasks.remove(item);
+    tasks.save();
   };
 
   $scope.onClickRemove = function() {
@@ -78,6 +81,7 @@ app.controller('mainController', function($scope, $ionicPopup, $ionicListDelegat
 
   $scope.onItemEdit = function(item) {
     getItem(item, false);
+    tasks.save();
   };
 
 }); 

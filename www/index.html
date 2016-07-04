@@ -27,23 +27,6 @@
         <h1 class="title" ng-bind="app"></h1>
       </ion-header-bar>
 
-      <ion-footer-bar class="bar-positive">
-        <div class="row">
-          <div class="col col-80">
-            <strong>Finalizadas</strong>
-          </div>
-          <div class="col col-20">
-            <label class="toggle">
-              <input type="checkbox" ng-model="showMarked">
-              <div class="track">
-                <div class="handle">
-                </div>
-              </div>
-            </label>
-          </div>
-        </div>
-      </ion-footer-bar>
-
       <ion-content>
         <div class="row">
           <div class="col col-50">
@@ -62,6 +45,7 @@
                 <ion-option-button class="button button-positive" ng-click="onItemEdit(item)">
                   Edit
                 </ion-option-button>
+                
               </div>
               <div class="col col-10">
                 <button class="button button-small button-positive button-outline" ng-click="onMarkTask(item)"><i class="icon ion-checkmark" ng-show="item.finalizada"></i></button>
@@ -71,6 +55,23 @@
         </ion-list>
         
       </ion-content>
+
+      <ion-footer-bar class="bar-positive">
+        <div class="row">
+          <div class="col col-80">
+            <strong>Finalizadas</strong>
+          </div>
+         
+            <label class="toggle col col-20" style="margin-top:-10px">
+              <input type="checkbox" ng-model="showMarked">
+              <div class="track">
+                <div class="handle">
+                </div>
+              </div>
+            </label>
+         
+        </div>
+      </ion-footer-bar>
     </ion-pane>
   </body>
 </html>
